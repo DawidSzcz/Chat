@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  nick: 
+  posts_count: MyString
+  Integer: MyString
+
+two:
+  nick: 
+  posts_count: MyString
+  Integer: MyString

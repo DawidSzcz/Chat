@@ -1,0 +1,20 @@
+<% if @chat_room.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@chat_room.errors.count, "error") %> prohibited
+        this article from being saved:</h2>
+      <ul>
+        <% @chat_room.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+<% end %>
+
+<%=form_for @chat_room do |c| %>
+<%=c.text_area :name %><br/>
+<%=c.label :Public %>
+<%=c.check_box :publicity, checked: true %><br/>
+<%=hidden_field_tag 'user', current_user.id%>
+<%=c.submit%>
+<%end%>
+<%= render 'chat_rooms/userpanel'%>

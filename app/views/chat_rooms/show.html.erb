@@ -1,0 +1,54 @@
+
+<h1>Chat należy do: <%=@chat_room.user.email%></h1>
+<div class="chat">
+<%@posts.each do |c|%>
+    <div class="post">
+    <p class="margin0">
+      <span class="little"><%= c.created_at.strftime("%F %H:%M") %></span>
+      <span>
+        <%if(c.user.equal?(nil))%>
+            Anonim
+        <%else%>
+            <%=c.user.email%>
+        <%end%>
+      </span>
+      <br/>
+      <span class="content"><%= c.content %></span>
+    </p>
+    </div>
+<%end%>
+</div>
+
+<div class="fixed_bot">
+<%= form_for [@chat_room, @chat_room.posts.build],class: "sth"  do |p|%>
+    <%= p.text_field( :content, class: "text") %>
+    <%if user_signed_in? %>
+        <%=hidden_field_tag 'user', current_user.id%>
+    <%end%>
+    <%= p.submit  class: "button"%>
+<%end%>
+<%=link_to 'Back', chat_rooms_path %>
+</div>
+
+<div class="user_panel">
+<%if(@chat_room.publicity) %>
+    <b>Chat Jest publiczny.<br/>
+    Wszyscy mogą z niego korzystać</b>
+<%else%>
+    <b> Uzytkownicy dopuszczeni do chatu:</b><br/>
+    <div class="user_options users" >
+        <%@chat_room.users.each do |u|%>
+            <b><%=u.email%></b>
+        <%end%>
+    </div>
+    <%if(current_user.id == @chat_room.user_id)%>
+         <br/><br/>
+        <%=form_for @part do |p|%>
+            Podaj nick jeśli chcesz kogos dodac:
+            <%=text_field_tag 'user'%>
+            <%=hidden_field_tag 'chat_room_id', @chat_room.id%>
+            <%p.submit 'Dodaj'%>
+        <%end%>
+    <%end%>
+<%end%>
+</div>

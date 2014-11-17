@@ -1,0 +1,22 @@
+<div class="user_panel">
+  <%if user_signed_in?%>
+      <b>Logged user:</b><br/>
+      <%=current_user.email%>
+      <br/><br/><br/>
+      Some other useful user inof and options.<br/>
+      Stuff<br/>
+      Stuff<br/>
+      Stuff<br/>
+      Lorem Ipsum <br/>
+
+      <div class="user_options">
+        <b><%=link_to 'Sign_out', destroy_user_session_path , :method => :delete,:data => { :confirm => 'Are you sure?' }%></b>
+        <b>Some other option </b>
+      </div>
+  <%else%>
+      <div class="user_options">
+        <b><%= link_to 'Sign_up', new_user_registration_path %></b>
+        <b><%= link_to 'Sign_in', new_user_session_path %></b>
+      </div>
+  <%end%>
+</div>
