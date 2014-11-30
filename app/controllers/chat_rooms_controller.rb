@@ -2,10 +2,10 @@ class ChatRoomsController < ApplicationController
 
   def show
     @posts = ChatRoom.find(params[:id]).posts
-    @post = Post.new
     @chat_room = ChatRoom.find(params[:id])
     @part = Participation.new
   end
+
   def index
     @chat_rooms = allowed(current_user)
   end
@@ -27,8 +27,9 @@ class ChatRoomsController < ApplicationController
     end
   end
   def add_participant
-    render plain: "siis"
+
   end
+
   def params_permited
     params.require(:chat_room).permit(:name, :publicity, :owner)
   end

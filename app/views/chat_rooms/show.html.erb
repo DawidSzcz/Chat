@@ -35,6 +35,17 @@
     <b>Chat Jest publiczny.<br/>
     Wszyscy mogą z niego korzystać</b>
 <%else%>
+      <% if @part.present? && @part.errors.any? %>
+          <div id="error_explanation" style="width: 100%" >
+            <b><%= pluralize(@part.errors.count, "error") %> prohibited
+              this part from being saved:<b>
+            <ul>
+              <% @part.errors.full_messages.each do |msg| %>
+                  <li><%= msg %></li>
+              <% end %>
+            </ul>
+          </div>
+      <% end %>
     <b> Uzytkownicy dopuszczeni do chatu:</b><br/>
     <div class="user_options users" >
         <%@chat_room.users.each do |u|%>
