@@ -1,0 +1,14 @@
+<div class="post">
+  <p class="margin0">
+    <span class="little"><%= post.created_at.strftime("%F %H:%M") %></span>
+      <span>
+        <%if(post.user.equal?(nil))%>
+            Anonim
+        <%else%>
+            <%=post.user.email%>
+        <%end%>
+      </span>
+    <br/>
+    <span class="content"><%= post.content %></span>
+  </p>
+</div>

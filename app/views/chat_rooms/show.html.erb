@@ -1,26 +1,12 @@
-
 <h1>Chat należy do: <%=@chat_room.user.email%></h1>
 <div class="chat">
 <%@posts.each do |c|%>
-    <div class="post">
-    <p class="margin0">
-      <span class="little"><%= c.created_at.strftime("%F %H:%M") %></span>
-      <span>
-        <%if(c.user.equal?(nil))%>
-            Anonim
-        <%else%>
-            <%=c.user.email%>
-        <%end%>
-      </span>
-      <br/>
-      <span class="content"><%= c.content %></span>
-    </p>
-    </div>
+    <%=render c%>
 <%end%>
 </div>
 
 <div class="fixed_bot">
-<%= form_for [@chat_room, @chat_room.posts.build],class: "sth"  do |p|%>
+   <%= form_for [@chat_room, @chat_room.posts.build], remote: true, class: "sth"  do |p|%>
     <%= p.text_field( :content, class: "text") %>
     <%if user_signed_in? %>
         <%=hidden_field_tag 'user', current_user.id%>

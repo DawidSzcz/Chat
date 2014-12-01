@@ -14,3 +14,5 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+$(".chat").scrollTop($(".chat").prop("scrollHeight"));
